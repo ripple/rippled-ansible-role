@@ -2,8 +2,11 @@
 - hosts: localhost
   connection: local
   sudo: true
+  pre_tasks:
+    - name: Install rippled
+      apt: name=apt-transport-https
   roles:
     - rippled
   tasks:
     - name: Verify rippled is running
-      wait_for: port=51234 state=started
+      wait_for: port=5005 state=started
